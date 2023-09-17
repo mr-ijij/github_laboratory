@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
   class Dog {
     + Name : string // (名前)
@@ -6,3 +7,4 @@ classDiagram
     + Bark() : void // (吠える)
     + Run() : void // (走る)
   }
+```
