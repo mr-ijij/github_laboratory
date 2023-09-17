@@ -8,3 +8,4 @@ classDiagram
     + Run() : void // (走る)
   }
 ```
+
