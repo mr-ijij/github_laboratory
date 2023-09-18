@@ -50,17 +50,5 @@ classDiagram
   class "ファイル検証サービス (ValidationService)" as ValidationServiceClass {
     +検証 (Validate)(file: File, rule: ValidationRule): bool
   }
-
-  RequestClass --* FileClass : 包含
-  RequestClass --* ValidationRuleClass : 包含
-  FileClass --|> FileRepositoryClass : 依存
-  ValidationRuleClass --|> ValidationRuleRepositoryClass : 依存
-  RequestRepositoryClass --|> RequestClass : 依存
-  ApplicationServiceClass --> RequestClass : 使用
-  ValidationServiceClass --> FileClass : 使用
-  ValidationServiceClass --> ValidationRuleClass : 使用
-  ApplicationServiceClass --> RequestRepositoryClass : 使用
-  ApplicationServiceClass --> FileRepositoryClass : 使用
-  ApplicationServiceClass --> ValidationRuleRepositoryClass : 使用
 ```
 
