@@ -1,54 +1,54 @@
 ```mermaid
 classDiagram
-  class "Request" as RequestClass {
+  class "送信リクエスト (Request)" as RequestClass {
     +ID: string // 送信リクエストID
-    +SentDate: date // 送信日時
-    +Status: string // ステータス
-    +File: File // ファイル
-    +ValidationRules: ValidationRule[] // 検証ルール
+    +送信日時 (SentDate): date
+    +ステータス (Status): string
+    +ファイル (File): File
+    +検証ルール (ValidationRules): ValidationRule[]
   }
   
-  class "File" as FileClass {
-    +FileName: string // ファイル名
-    +Size: int // サイズ
-    +Format: string // 形式
+  class "ファイル (File)" as FileClass {
+    +ファイル名 (FileName): string
+    +サイズ (Size): int
+    +形式 (Format): string
   }
 
-  class "ValidationRule" as ValidationRuleClass {
-    +RuleName: string // ルール名
-    +Description: string // 説明
-    +Condition: string // 条件
+  class "検証ルール (ValidationRule)" as ValidationRuleClass {
+    +ルール名 (RuleName): string
+    +説明 (Description): string
+    +条件 (Condition): string
   }
 
-  class "UserAccount" as UserAccountClass {
-    +UserID: string // ユーザーID
-    +Name: string // 名前
-    +EmailAddress: string // メールアドレス
+  class "ユーザーアカウント (UserAccount)" as UserAccountClass {
+    +ユーザーID (UserID): string
+    +名前 (Name): string
+    +メールアドレス (EmailAddress): string
   }
 
-  class "RequestRepository" as RequestRepositoryClass {
-    +Save(request: Request): void // 保存
-    +Find(ID: string): Request // 検索
+  class "送信リクエストリポジトリ (RequestRepository)" as RequestRepositoryClass {
+    +保存 (Save)(request: Request): void
+    +検索 (Find)(ID: string): Request
   }
 
-  class "FileRepository" as FileRepositoryClass {
-    +Save(file: File): void // 保存
-    +Get(FileName: string): File // 取得
+  class "ファイルリポジトリ (FileRepository)" as FileRepositoryClass {
+    +保存 (Save)(file: File): void
+    +取得 (Get)(ファイル名: string): File
   }
 
-  class "ValidationRuleRepository" as ValidationRuleRepositoryClass {
-    +Save(rule: ValidationRule): void // 保存
-    +Get(RuleName: string): ValidationRule // 取得
+  class "検証ルールリポジトリ (ValidationRuleRepository)" as ValidationRuleRepositoryClass {
+    +保存 (Save)(rule: ValidationRule): void
+    +取得 (Get)(ルール名: string): ValidationRule
   }
 
-  class "ApplicationService" as ApplicationServiceClass {
-    +CreateRequest(): Request // 送信リクエスト作成
-    +StartValidation(request: Request): void // ファイル検証開始
-    +MonitorProgress(request: Request): void // 進捗監視
+  class "アプリケーションサービス (ApplicationService)" as ApplicationServiceClass {
+    +送信リクエスト作成 (CreateRequest)(): Request
+    +ファイル検証開始 (StartValidation)(request: Request): void
+    +進捗監視 (MonitorProgress)(request: Request): void
   }
 
-  class "ValidationService" as ValidationServiceClass {
-    +Validate(file: File, rule: ValidationRule): bool // 検証
+  class "ファイル検証サービス (ValidationService)" as ValidationServiceClass {
+    +検証 (Validate)(file: File, rule: ValidationRule): bool
   }
 
   RequestClass --* FileClass : 包含
@@ -62,6 +62,5 @@ classDiagram
   ApplicationServiceClass --> RequestRepositoryClass : 使用
   ApplicationServiceClass --> FileRepositoryClass : 使用
   ApplicationServiceClass --> ValidationRuleRepositoryClass : 使用
-
 ```
 
