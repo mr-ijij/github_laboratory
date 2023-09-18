@@ -1,65 +1,66 @@
 ```mermaid
 classDiagram
-  class "送信リクエスト" as Request {
-    +ID: string
-    +送信日時: date
-    +ステータス: string
-    +ファイル: File
-    +検証ルール: ValidationRule[]
+  class "Request" as RequestClass {
+    +ID: string // 送信リクエストID
+    +SentDate: date // 送信日時
+    +Status: string // ステータス
+    +File: File // ファイル
+    +ValidationRules: ValidationRule[] // 検証ルール
   }
   
-  class "ファイル" as File {
-    +ファイル名: string
-    +サイズ: int
-    +形式: string
+  class "File" as FileClass {
+    +FileName: string // ファイル名
+    +Size: int // サイズ
+    +Format: string // 形式
   }
 
-  class "検証ルール" as ValidationRule {
-    +ルール名: string
-    +説明: string
-    +条件: string
+  class "ValidationRule" as ValidationRuleClass {
+    +RuleName: string // ルール名
+    +Description: string // 説明
+    +Condition: string // 条件
   }
 
-  class "ユーザーアカウント" as UserAccount {
-    +ユーザーID: string
-    +名前: string
-    +メールアドレス: string
+  class "UserAccount" as UserAccountClass {
+    +UserID: string // ユーザーID
+    +Name: string // 名前
+    +EmailAddress: string // メールアドレス
   }
 
-  class "送信リクエストリポジトリ" as RequestRepository {
-    +保存(送信リクエスト): void
-    +検索(ID: string): Request
+  class "RequestRepository" as RequestRepositoryClass {
+    +Save(request: Request): void // 保存
+    +Find(ID: string): Request // 検索
   }
 
-  class "ファイルリポジトリ" as FileRepository {
-    +保存(ファイル): void
-    +取得(ファイル名: string): File
+  class "FileRepository" as FileRepositoryClass {
+    +Save(file: File): void // 保存
+    +Get(FileName: string): File // 取得
   }
 
-  class "検証ルールリポジトリ" as ValidationRuleRepository {
-    +保存(検証ルール): void
-    +取得(ルール名: string): ValidationRule
+  class "ValidationRuleRepository" as ValidationRuleRepositoryClass {
+    +Save(rule: ValidationRule): void // 保存
+    +Get(RuleName: string): ValidationRule // 取得
   }
 
-  class "アプリケーションサービス" as ApplicationService {
-    +送信リクエスト作成(): Request
-    +ファイル検証開始(送信リクエスト): void
-    +進捗監視(送信リクエスト): void
+  class "ApplicationService" as ApplicationServiceClass {
+    +CreateRequest(): Request // 送信リクエスト作成
+    +StartValidation(request: Request): void // ファイル検証開始
+    +MonitorProgress(request: Request): void // 進捗監視
   }
 
-  class "ファイル検証サービス" as ValidationService {
-    +検証(ファイル, 検証ルール): bool
+  class "ValidationService" as ValidationServiceClass {
+    +Validate(file: File, rule: ValidationRule): bool // 検証
   }
 
-  Request --* File : 包含
-  Request --* ValidationRule : 包含
-  File --|> FileRepository : 依存
-  ValidationRule --|> ValidationRuleRepository : 依存
-  RequestRepository --|> Request : 依存
-  ApplicationService --> Request : 使用
-  ValidationService --> File : 使用
-  ValidationService --> ValidationRule : 使用
-  ApplicationService --> RequestRepository : 使用
-  ApplicationService --> FileRepository : 使用
-  ApplicationService --> ValidationRuleRepository : 使用
+  RequestClass --* FileClass : 包含
+  RequestClass --* ValidationRuleClass : 包含
+  FileClass --|> FileRepositoryClass : 依存
+  ValidationRuleClass --|> ValidationRuleRepositoryClass : 依存
+  RequestRepositoryClass --|> RequestClass : 依存
+  ApplicationServiceClass --> RequestClass : 使用
+  ValidationServiceClass --> FileClass : 使用
+  ValidationServiceClass --> ValidationRuleClass : 使用
+  ApplicationServiceClass --> RequestRepositoryClass : 使用
+  ApplicationServiceClass --> FileRepositoryClass : 使用
+  ApplicationServiceClass --> ValidationRuleRepositoryClass : 使用
+
 ```
