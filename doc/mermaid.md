@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
   class "送信リクエスト" as Request {
     +ID: string
@@ -61,3 +62,4 @@ classDiagram
   ApplicationService --> RequestRepository : 使用
   ApplicationService --> FileRepository : 使用
   ApplicationService --> ValidationRuleRepository : 使用
+```
